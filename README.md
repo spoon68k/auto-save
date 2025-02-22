@@ -1,12 +1,7 @@
-# nvim-autosave
+# NeoVim Auto Save
 
 A simple Neovim Lua plugin that autosaves your files after a specified period of inactivity.
-The delay is determined by the `NVIM_AUTOSAVE` environment variable (in milliseconds).
-
-## Features
-
-- **Debounced Autosave:** Files are automatically saved after a period of inactivity.
-- **Configurable:** Enable autosave by setting the `NVIM_AUTOSAVE` variable to your desired debounce delay.
+The delay is configurable during setup.
 
 ## Installation with lazy.nvim
 
@@ -14,23 +9,14 @@ Add the following to your lazy.nvim configuration:
 
 ```lua
 {
-  "your-username/nvim-autosave",  -- Replace with the correct repository path
+  "your-username/auto-save",  -- Replace with the correct repository path
   config = function()
-    require("autosave").setup()
+    require("auto-save").setup({
+      debounce_timer = 5000, -- save after 5s of inactivity
+    })
   end,
 }
 ```
-
-## Configuration
-
-Set the environment variable `NVIM_AUTOSAVE` in your shell before launching Neovim. For example:
-
-```sh
-export NVIM_AUTOSAVE=5000
-```
-
-This configuration will autosave files 5 seconds after you stop typing. If set to `0` or unset,
-utosave is disabled.
 
 ## Usage
 
