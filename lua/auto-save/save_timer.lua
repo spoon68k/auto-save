@@ -29,6 +29,12 @@ function M.reset()
     timer = vim.loop.new_timer()
     timer:start(M.config.debounce_time, 0, vim.schedule_wrap(function()
         local buf = vim.api.nvim_get_current_buf()
+
+        -- Skip autosave if the buffer is not a "real" file
+        if vim.bo[buf].buftype ~= "" then
+            return
+        end
+
         -- Save only if the buffer is modifiable and has unsaved changes
         if vim.bo[buf].modifiable and vim.bo[buf].modified then
             vim.cmd("update")
